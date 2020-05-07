@@ -116,7 +116,7 @@ class BaseNERModel(BaseModel):
                 for layer in bert_model.layers:
                     layer.trainable = False
 
-            model_inputs.extend(bert_model.inputs)
+            model_inputs.extend(bert_model.inputs)#由于Bert输入是前后句，所以extend把两句话和为了一句
             bert_embed = NonMaskingLayer()(bert_model.output)
             input_embed.append(tf.keras.layers.SpatialDropout1D(0.2)(bert_embed))
 
